@@ -9,22 +9,19 @@ Server is connected another network with L3 switch, so Server must have routing 
 ## Preq
 #### 1. change Nodeport
 #### 2. For Multus CNI,
-    2-1. if you make NetworkAttachmentDefinition CRD for Multus CNI, 
-      make NAD first as "openvpn-datanet in deploying namespace.
-      And, set IP on podAnnotaion field.
-    2-2.  Add routing in .Values.route,
-      And then match interface name with podAnnotition's interface.
-    ** If you use routing better, check the file     templates/openvpn-deployment.yaml command field.
+#### 2-1. if you make NetworkAttachmentDefinition CRD for Multus CNI, 
+make NAD first as "openvpn-datanet in deploying namespace.
+And, set IP on podAnnotaion field.
+#### 2-2.  Add routing in .Values.route,
+And then match interface name with podAnnotition's interface.
+* If you use routing better, check the file templates/openvpn-deployment.yaml command field.
 #### 3.  Set "lab_public_ip" in values.file that is same as your host server IP or Real Public IP.
 #### 4.  if you deploy with private registry that need secrets for auth, Use ImagePullSecrets in values.file.
 But Before you use, Make ImagePullSecrets Object first in deploying namespace and then write the name in your values.file.
-  > refer to the file "ncp-docker-registry-secret.txt".
-#
+  * refer to the file "ncp-docker-registry-secret.txt".
+##
 # --- End ---
-# Below is original READ.me
-
-
-
+## Below is original READ.me
 # ⚠️ Repo Archive Notice
 
 As of Nov 13, 2020, charts in this repo will no longer be updated.
