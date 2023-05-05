@@ -5,10 +5,21 @@ In this hands-on, openvpn server has an multus ip by multus CNI.
 Server is connected another network with L3 switch, so Server must have routing tables for other networks that L3 switch know by Multus interface.
 > route add -net [network cidr] dev [multus i/f]
 
+## Preq - Kor
+#### 1. 노드포트가 곂치지 않게 변경.
+#### 2. Multus CNI쓸경우에만 적용
+#### 2-1. Multus CNI쓸 경우 해당 NAD를 그 namespace에 배포가 미리되어 있어야 하며, 이름은 "openvpn-datanet"으로 배포하기.
+이 이름은 podAnnotaion에 정의되어 있고 변경가능.
+#### 2-2. Multus i/f를 통해 라우팅이 필요할 경우 ;od command에 추가하기 
+values.route.interface의 이름도 podAnnotaion과 맞춰주기
+* 네트워크 개수에 따라 직접 추가가 필요함. templates/openvpn-deployment.yaml command field를 참조하면됨.
+#### 3.  "lab_public_ip" in values.file 는 client ovpn파일 만들 때 사용되며, client에서 연결하고 싶은 openvpnserver의 ip를 설정하는 것으로, host의 ip이거나 public ip임
+#### 4. 사용되는 이미지가 private registry에 있으면 인증을 위해 imagepullsecret을 사용하면됨. 미리 배포되어 있어야함
+  * 이 파일을 참고하면됨 "ncp-docker-registry-secret.txt".
 
-## Preq
-#### 1. change Nodeport
-#### 2. For Multus CNI,
+## Preq - Eng
+#### 1. change Nodeport. 노드포트가 곂치지 않게 변경.
+#### 2. For Multus CNI, Multus CNI쓸경우에만 적용
 #### 2-1. if you make NetworkAttachmentDefinition CRD for Multus CNI, 
 make NAD first as "openvpn-datanet in deploying namespace.
 And, set IP on podAnnotaion field.
@@ -16,9 +27,11 @@ And, set IP on podAnnotaion field.
 And then match interface name with podAnnotition's interface.
 * If you use routing better, check the file templates/openvpn-deployment.yaml command field.
 #### 3.  Set "lab_public_ip" in values.file that is same as your host server IP or Real Public IP.
+This is used when client ovpn file will be made.
 #### 4.  if you deploy with private registry that need secrets for auth, Use ImagePullSecrets in values.file.
 But Before you use, Make ImagePullSecrets Object first in deploying namespace and then write the name in your values.file.
   * refer to the file "ncp-docker-registry-secret.txt".
+
 ##
 # --- End ---
 ## Below is original READ.me
