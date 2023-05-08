@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: pod-gw-client
+  name: pod-gw-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pod-gw-client
+  template:
+    metadata:
+      labels:
+        app: pod-gw-client
+    spec:
+      containers:
+      - image: dedene/pod-gateway:v1.8.1-disable-ipv6
+        name: pod-gateway-client
+        command: [ "/bin/bash", "-c"]
+        args:
+        - cp /tmp/client_init.sh /bin/;
+          cp /tmp/nat.conf /config/;
+          cp /tmp/settings.sh /config/;
+          sleep infinity;
+        volumeMounts:
+        - name: client-init-sh-for-podgw-client
+          mountPath: /tmp/client_init.sh
+          subPath: client_init.sh
+        - name: nat-conf-for-podgw-client 
+          mountPath: /tmp/nat.conf
+          subPath: nat.conf
+        - name: settings-sh-for-podgw-client
+          mountPath: /tmp/settings.sh
+          subPath: settings.sh
+        securityContext:
+          privileged: true 
+      volumes:
+        - name: client-init-sh-for-podgw-client
+          configMap:
+            name: client-init-sh-for-podgw-client
+            defaultMode: 420
+        - name: nat-conf-for-podgw-client 
+          configMap:
+            name: nat-conf-for-podgw-client
+            defaultMode: 420
+        - name: settings-sh-for-podgw-client
+          configMap:
+            name: settings-sh-for-podgw-client
+            defaultMode: 420

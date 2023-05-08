@@ -1,0 +1,16 @@
+apiVersion: v1
+data:
+  nat.conf: |
+    new2-pod-gateway-client 11 ## change here
+
+    ## # default nat.sh
+    ## # Configure client PODs with static IP addresses
+    ## # and ports exposed through NAT
+    ## # static IPs must be bellow VXLAN_GATEWAY_FIRST_DYNAMIC_IP
+    ## #
+    ## # hostname IP ports(coma separated)
+    ## # Example:
+    ## # transmission 10 tcp:18289,udp:18289
+kind: ConfigMap
+metadata:
+  name: nat-conf-for-podgw-client
