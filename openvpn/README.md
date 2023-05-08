@@ -15,7 +15,7 @@ values.route.interface의 이름도 podAnnotaion과 맞춰주기
 * 네트워크 개수에 따라 직접 추가가 필요함. templates/openvpn-deployment.yaml command field를 참조하면됨.
 #### 3.  "lab_public_ip" in values.file 는 client ovpn파일 만들 때 사용되며, client에서 연결하고 싶은 openvpnserver의 ip를 설정하는 것으로, host의 ip이거나 public ip임
 #### 4. 사용되는 이미지가 private registry에 있으면 인증을 위해 imagepullsecret을 사용하면됨. 미리 배포되어 있어야함
-  * 이 파일을 참고하면됨 "ncp-docker-registry-secret.txt".
+  * 이 파일을 참고하면됨 "csp-docker-registry-secret.txt".
 
 ## Preq - Eng
 #### 1. change Nodeport. 노드포트가 곂치지 않게 변경.
