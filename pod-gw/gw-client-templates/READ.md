@@ -15,7 +15,8 @@
 1. configmap 3개와 deployment를 배포한다.
     > nat.conf와 settings.sh는 /conf 안에 생성되며, client_init.sh는 /bin안에 생성된다.
     > pod의 privileged가 true가 아니면 client_init.sh를 수행할 수 없다.(권한 부족)
-2. nat-conf파일의 new2-pod-gateway-client를 해당 pod의 hostname으로 변경필요
-3. 배포한 pod에서 client_init.sh를 실행한다.
+2. (option) Preq에 써놓은 것을 배포된 pod안의 해당파일을 직접 수정한다.
+3. nat-conf파일의 new2-pod-gateway-client를 해당 pod의 hostname으로 변경필요
+4. 배포한 pod에서 client_init.sh를 실행한다.
     - 최종적으로 Gateway ready and reachable 이라는 메세지가 나오는지 본다.
     - 라우팅 테이블을 확인한다.
