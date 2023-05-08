@@ -34,7 +34,7 @@ spec:
           mountPath: /tmp/settings.sh
           subPath: settings.sh
         securityContext:
-          privileged: true 
+          privileged: true #이부분이 없으면 라우팅을 변경할 수 없어 client.sh를 수행하지 못한다.
       volumes:
         - name: client-init-sh-for-podgw-client
           configMap:
