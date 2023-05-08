@@ -1,5 +1,10 @@
+# pod형태로 배포된 vpn client가 gw가 되어 다른 pod들이 vpn server site와 통신하기 위함이다.
 ## Client Site의 pod를 구축하는 방법을 소개하는 것이다.
 ## 이미 배포된 vpn client pod로 트래픽이 흐를 수 있게 한다.
+## 원래 pod는 default gw변경이 불가하기 때문에 해당 이미지가 필요하다.
+
+### ref
+1. https://github.com/angelnu/pod-gateway
 
 ### Preq - change here라고 주석달아놓은 곳들을 바꾼다. 사실 배포한 후에 해도된다.
 1. nat-conf파일의 숫자로 고정 ip가 할당되므로 원하는 ip를 설정한다.
