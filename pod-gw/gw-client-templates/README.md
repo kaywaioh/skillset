@@ -2,7 +2,7 @@
 1. https://github.com/angelnu/pod-gateway
 
 
-# 1. client site의 gateway인 pod를 생성함으로써 vpn의 client로 동작함과 동시에 해당 client site의 관문역할을 한다.
+# 1. vpn의 client로 동작함과 동시에 해당 client site의 관문역할을 하는 GW-POD생성
 openvpn의 client로 동작하도록 openvpn이 설치되어 있어야한다.
 ### openvpn 설치 방법
 ```bash
@@ -21,7 +21,8 @@ openvpn --version #check if installed
 3. openvpn --config [clientfile].ovpn을 실행시켜 vpn을 연동한다.
 4. 배포한 pod에서 gateway_init.sh를 실행한다.
 
-# 2. pod형태로 배포된 vpn client가 gw가 되어 다른 pod들이 vpn server site와 통신하기 위함이다.
+
+# 2. Client Site의 Client pod생성
 Client Site의 pod를 구축하는 방법을 소개하는 것이다.
 이미 배포된 vpn client pod로 트래픽이 흐를 수 있게 한다.
 원래 pod는 default gw변경이 불가하기 때문에 해당 이미지가 필요하다.
@@ -43,7 +44,7 @@ Client Site의 pod를 구축하는 방법을 소개하는 것이다.
     - 최종적으로 Gateway ready and reachable 이라는 메세지가 나오는지 본다.
     - 라우팅 테이블을 확인한다.
 
-### Quick Start
+### Quick Start (Deploy의 3번과정은 필수)
 ```bash
 kubectl create ns vpn
 kubectl apply -f configmap-client-init-sh-for-podgw-client.yaml -f configmap-nat-conf-for-podgw-client.yaml -f configmap-settings-sh-for-podgw-client.yaml -nvpn
