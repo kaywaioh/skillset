@@ -9,13 +9,14 @@ Server is connected another network with L3 switch, so Server must have routing 
 #### 1. 노드포트가 곂치지 않게 변경.
 #### 2. Multus CNI쓸경우에만 적용
 #### 2-1. Multus CNI쓸 경우 해당 NAD를 그 namespace에 배포가 미리되어 있어야 하며, 이름은 "openvpn-datanet"으로 배포하기.
-이 이름은 podAnnotaion에 정의되어 있고 변경가능.
-#### 2-2. Multus i/f를 통해 라우팅이 필요할 경우 ;od command에 추가하기 
-values.route.interface의 이름도 podAnnotaion과 맞춰주기
+이 이름은 values파일의 podAnnotaion에 정의되어 있고 변경가능.
+#### 2-2. Multus i/f를 통해 라우팅이 필요할 경우 template폴더의 deployment.yaml내부에서 pod command에 추가하기 
+values.route.interface의 이름도 podAnnotaion에 설정된 interface 이름과 맞춰주기
 * 네트워크 개수에 따라 직접 추가가 필요함. templates/openvpn-deployment.yaml command field를 참조하면됨.
-#### 3.  "lab_public_ip" in values.file 는 client ovpn파일 만들 때 사용되며, client에서 연결하고 싶은 openvpnserver의 ip를 설정하는 것으로, host의 ip이거나 public ip임
+#### 3.  "lab_public_ip" in values.file 는 해당 pod의 /etc/openvpn/newClient.sh를 실행할 때 자동으로 생성되는 client ovpn파일이 만들어질 때 사용되며, client에서 연결하고 싶은 openvpnserver의 ip를 설정하는 것으로, host의 ip이거나 public ip임
+ovpn 파일은 자동으로 생성되더라도 한번씩 체크할 필요가 있음
 #### 4. 사용되는 이미지가 private registry에 있으면 인증을 위해 imagepullsecret을 사용하면됨. 미리 배포되어 있어야함
-  * 이 파일을 참고하면됨 "csp-docker-registry-secret.txt".
+  * 이 파일을 참고하면됨 "csp-docker-registry-secret.txt"
 
 ## Preq - Eng
 #### 1. change Nodeport. 노드포트가 곂치지 않게 변경.
