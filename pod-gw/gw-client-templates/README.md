@@ -26,4 +26,5 @@ Client Site의 pod를 구축하는 방법을 소개하는 것이다.
 kubectl create ns vpn
 kubectl apply -f configmap-client-init-sh-for-podgw-client.yaml -f configmap-nat-conf-for-podgw-client.yaml -f configmap-settings-sh-for-podgw-client.yaml -nvpn
 kubectl apply -f pod-gw-client-deployment.yaml -nvpn
+kubectl exec -it -nvpn [pod-name] -- /bin/bash client_init.sh
 ```
